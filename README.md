@@ -64,8 +64,13 @@ for movie in recommended_movies:
   print(movie)
 ```
 
-## Sample Output
+## Output
 ### Before Adding Weights
 ![image](https://user-images.githubusercontent.com/75234991/232090004-3f124c7a-2531-4da5-bf7c-297661f1b3dd.png)
 ### After Adding Weights
 ![image](https://user-images.githubusercontent.com/75234991/232090121-7728221f-ad4e-478b-9e0f-9f1cfaf579a2.png)
+### Data Visualization
+![WhatsApp Image 2023-04-14 at 21 25 53](https://user-images.githubusercontent.com/75234991/232095605-93a24aae-7415-41f6-ba3f-8855e22a56f2.jpg)
+![WhatsApp Image 2023-04-14 at 21 25 54](https://user-images.githubusercontent.com/75234991/232095665-78098987-3741-4161-9bc7-01e18f458054.jpg)
+
+
