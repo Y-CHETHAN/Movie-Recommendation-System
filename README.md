@@ -6,14 +6,60 @@ Users were selected at random for inclusion. All selected users had rated at lea
 
 The data are contained in the files links.csv, movies.csv, ratings.csv and tags.csv.
 
-## Algorithm
-1. Import the necessary libraries: numpy and pandas
-2. Read the 'links.csv', 'movies.csv', 'ratings.csv', and 'tags.csv' files into separate dataframes: links_df, movies_df, ratings_df, and tags_df
-3. Merge the movies_df and ratings_df dataframes on 'movieId' to create a new dataframe called df
-4. Set the movie title M_a to the movie you want to recommend similar movies for
-5. Find the top 5 users who rated M_a the highest by filtering the df dataframe for rows where the title is equal to M_a, sorting by rating in descending order, and selecting the top 5 userId values
-6. For each user, find their top 5 rated movies (excluding M_a) by filtering the df dataframe for rows where the userId is equal to the user and the title is not equal to M_a, sorting by rating in descending order, and selecting the top 5 title values
-7. Combine all recommended movies into a single list and remove duplicates using numpy's unique function
-8. For each recommended movie, calculate a similarity score based on the overlap between its genres and M_a's genres by splitting the genre strings and comparing the resulting lists
-9. Sort the recommended movies by similarity score in descending order using the sorted function with a lambda function as the key argument
-10. Print the recommended movies in order of similarity score using a for loop
+## Flowchart
+![image](https://user-images.githubusercontent.com/75234991/232089335-4d32ff79-0f31-4560-b311-04933626e9fd.png)
+
+## Source Code
+```python3
+import numpy as np
+import pandas as pd
+
+links_df=pd.read_csv("links.csv")
+links_df.head()
+
+movies_df=pd.read_csv("movies.csv")
+movies_df.head()
+
+ratings_df=pd.read_csv("ratings.csv")
+ratings_df.head()
+
+tags_df=pd.read_csv("tags.csv")
+tags_df.head()
+
+df=movies_df.merge(ratings_df,on='movieId')
+
+df.head()
+
+M_a='Assassins (1995)'
+recommended_movies=[]
+movie_db=df[df['title']==M_a]\
+  .sort_values(by='rating',ascending=False)
+for user in movie_db.iloc[:5]['userId'].values:
+  rated_movies=df[df['userId']==user]
+  rated_movies=rated_movies[rated_movies['title']!=M_a]\
+    .sort_values(by='rating',ascending=False)\
+    .iloc[:5]
+  recommended_movies.extend(list(rated_movies['title'].values))
+recommended_movies=np.unique(recommended_movies)
+for movie in recommended_movies:
+  print(movie)
+
+gmovie_genres=df[df['title']==M_a].iloc[0]['genres'].split('|')
+scores={}
+for movie in recommended_movies:
+  movied=df[df['title']==movie].iloc[0]
+  movie_genres=movied['genres'].split('|')
+  score=0
+
+  for gmovie_genre in gmovie_genres:
+    if gmovie_genre in movie_genres:
+      score=score+1
+
+  scores[movie]=score
+
+recommended_movies=sorted(scores,key=lambda x:scores[x])[::-1]
+
+for movie in recommended_movies:
+  print(movie)
+```
+
