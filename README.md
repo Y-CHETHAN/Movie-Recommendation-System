@@ -1,4 +1,5 @@
 # Movie Recommendation System Data Warehouse Project
+
 ## About Dataset
 This dataset describes 5-star rating and free-text tagging activity from MovieLens, a movie recommendation service. It contains 100836 ratings and 3683 tag applications across 9742 movies. These data were created by 610 users between March 29, 1996 and September 24, 2018. This dataset was generated on September 26, 2018.
 
@@ -63,3 +64,8 @@ for movie in recommended_movies:
   print(movie)
 ```
 
+## Sample Output
+### Before Adding Weights
+![image](https://user-images.githubusercontent.com/75234991/232090004-3f124c7a-2531-4da5-bf7c-297661f1b3dd.png)
+### After Adding Weights
+![image](https://user-images.githubusercontent.com/75234991/232090121-7728221f-ad4e-478b-9e0f-9f1cfaf579a2.png)
